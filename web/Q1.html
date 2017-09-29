@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <title>5주차 실습과제 1번</title>
+
+    <script type="text/javascript"  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function()
+        {
+            $("#listButton").click(function() <!--listButton이 클릭되었을 시 수행-->
+            {
+                $.ajax(
+                    {
+                    type: 'post',   <!-- post 방식으로 통신-->
+                    url: './list.html',
+                    dataType: 'html', <!--서버측에서 전송한 데이터를 해석 할 방식-->
+                    success: function (data) <!--성공했을 시 호출 할 콜백-->
+                    {
+                        $("#listDiv").html(data); <!--listDiv에 list.html를 문자열 화 해서 입력-->
+                    }
+                });
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <input type="button"  id="listButton" value="리스트출력" />
+    <br/>
+    <div id="listDiv"></div>
+</body>
+</html>

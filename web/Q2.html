@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <title>5주차 실습과제 1번</title>
+
+    <script type="text/javascript"  src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+    <script type="text/javascript">
+        $(function ()
+        {
+        $("#searchButton").click(function ()   <!--searchButton click하면 기능 수행-->
+        {
+         var flag=$("#resultSelect").val();<!-- resultSelect에서 선택된 value를 flag에 입력-->
+         if(flag=="Y")<!--Y일 경우 url-->
+         {
+             url="./list1.json";
+         }
+         else{url="./list2.json"};<!--N일 경우 url-->
+         $.ajax(
+             {
+                 url:url,<!--resultSelect의 value에 따라 지정된url-->
+                 dataType:'json',
+                 success:function(data)
+                 {
+                     if(data.flag=="Y"){var result =data.data;}
+                     else{var result=data.data;}
+                     $("#listLayout").html(data.data);<!--선택된 json의 data를 문자열화 해서 listLayout에 삽입-->
+                 }
+             });
+        })
+        })
+    </script>
+</head>
+<body>
+    <select id="resultSelect">
+        <option value="Y">성공JSON</option>
+        <option value="N">실패JSON</option>
+    </select>
+    <input type="button" id="searchButton" value="조회"/><br/>
+    <div id="listLayout"></div>
+</body>
+</html>
